@@ -162,7 +162,30 @@ class _HomeState extends State<Home> {
                         ),
                         GestureDetector(
                           onTap: (){
-                            _removerAnotacao(anotacao.id);
+                            showDialog(
+                              context: context,
+                              builder: (context) {
+                                return AlertDialog(
+                                  title: Text("Excluir anotação?"),
+                                  content: Text("Deseja realmente exluir a anotação '" + anotacao.titulo + "'"),
+                                  actions: [
+                                    FlatButton(
+                                      onPressed: () => Navigator.pop(context),
+                                      child: Text("Cancelar"),
+                                    ),
+                                    FlatButton(
+                                      onPressed: () {
+                                        _removerAnotacao(anotacao.id);
+                                        Navigator.pop(context);
+                                      },
+                                      child: Text("Excluir"),
+                                    ),
+                                  ],
+                                );
+                              }
+
+                            );
+                            ////_removerAnotacao(anotacao.id);
                           },
                           child: Padding(
                             padding: EdgeInsets.only(right: 0),
